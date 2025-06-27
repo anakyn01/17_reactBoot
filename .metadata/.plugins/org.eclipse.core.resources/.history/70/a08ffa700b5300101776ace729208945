@@ -1,0 +1,89 @@
+package com.hbk.restboot.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;  // @Transient 추가
+
+@Entity
+public class Product {
+
+    @Id
+    private Long id;
+    private String title;
+    private String description;
+    private double price;
+
+    @Transient  // Image 클래스를 JPA가 엔티티로 인식하지 않도록 처리
+    private Image image;  // 이미지 객체
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    // 이미지 객체의 getter와 setter
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    // 이미지 URL을 가져오는 메서드
+    public String getImageUrl() {
+        return image != null ? image.getUrl() : null;
+    }
+
+    // 이미지 URL을 설정하는 메서드
+    public void setImageUrl(String imageUrl) {
+        // image 객체가 null인 경우 새로 생성
+        if (this.image == null) {
+            this.image = new Image(); // Image 객체를 새로 생성
+        }
+        // image 객체의 url을 설정
+        this.image.setUrl(imageUrl);
+    }
+
+    // 내부 Image 클래스
+    public static class Image {
+        private String url; // 이미지 URL
+
+        // Getter, Setter
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+    }
+}

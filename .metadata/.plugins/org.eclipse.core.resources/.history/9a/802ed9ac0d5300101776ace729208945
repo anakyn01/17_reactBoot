@@ -1,0 +1,5 @@
+package com.hbk.restboot.service;
+
+public interface ProductService {
+
+}

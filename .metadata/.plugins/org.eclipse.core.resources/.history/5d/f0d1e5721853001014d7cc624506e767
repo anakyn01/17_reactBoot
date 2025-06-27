@@ -1,0 +1,66 @@
+package com.hbk.restboot.service;
+
+import com.hbk.restboot.entity.Product;
+import com.hbk.restboot.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProductService {
+
+    private final ProductRepository productRepository;
+
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    // 제품 생성
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    // 제품 조회 (ID로 조회)
+    public Product getProductById(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        return product.orElse(null); // 만약 제품이 없으면 null 반환
+    }
+
+    // 모든 제품 조회
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    // 제품 수정
+    public Product updateProduct(Long id, Product productDetails) {
+        Optional<Product> existingProductOpt = productRepository.findById(id);
+        if (existingProductOpt.isPresent()) {
+            Product existingProduct = existingProductOpt.get();
+            existingProduct.setTitle(productDetails.getTitle());
+            existingProduct.setPrice(productDetails.getPrice());
+            existingProduct.setDescription(productDetails.getDescription());
+            existingProduct.setCategory(productDetails.getCategory());
+            existingProduct.setImage(productDetails.getImage());
+            return productRepository.save(existingProduct);
+        } else {
+            return null; // 제품이 존재하지 않으면 null 반환
+        }
+    }
+
+    // 제품 삭제
+    public boolean deleteProduct(Long id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+            return true;
+        }
+        return false; // 제품이 없으면 삭제 실패
+    }
+
+    // 제목으로 제품 검색
+    public List<Product> findByTitle(String title) {
+        return productRepository.findByTitle(title);
+    }
+}

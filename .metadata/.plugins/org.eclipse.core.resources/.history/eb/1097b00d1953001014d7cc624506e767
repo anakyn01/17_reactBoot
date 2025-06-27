@@ -1,0 +1,15 @@
+spring.application.name=restboot
+server.port=9700
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+ 
+spring.datasource.url=jdbc:h2:~/restboot
+spring.datasource.driverClassName=org.h2.Driver  
+spring.datasource.username=anakyn
+spring.datasource.password=1234
+
+Copyspring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.hibernate.ddl-auto=update

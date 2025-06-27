@@ -1,0 +1,2 @@
+spring.application.name=restboot
+server.port=9700

@@ -1,0 +1,5 @@
+package com.hbk.restboot.entity;
+
+public interface ProductRepository {
+
+}

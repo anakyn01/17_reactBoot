@@ -1,0 +1,21 @@
+package com.hbk.restboot.service;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.hbk.restboot.entity.Product;
+
+@Service
+public class ProductService {
+
+    public List<Product> getAllProducts() {
+        // 상품 정보 (하드코딩 예시)
+        return Arrays.asList(
+                new Product(1L, "상품1", "설명1", 10000.0, "https://example.com/images/product1.jpg"),
+                new Product(2L, "상품2", "설명2", 20000.0, "https://example.com/images/product2.jpg"),
+                new Product(3L, "상품3", "설명3", 30000.0, "https://example.com/images/product3.jpg")
+        );
+    }
+}

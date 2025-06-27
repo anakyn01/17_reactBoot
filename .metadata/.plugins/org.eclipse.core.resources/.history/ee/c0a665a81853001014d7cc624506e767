@@ -1,0 +1,55 @@
+package com.hbk.restboot.service;
+
+import com.hbk.restboot.entity.Product;
+import com.hbk.restboot.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProductService {
+
+    private final ProductRepository productRepository;
+
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    // 제품 리스트 가져오기
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    // 특정 제품 ID로 가져오기
+    public Optional<Product> getProductById(long id) {
+        return productRepository.findById(id);
+    }
+
+    // 새로운 제품 추가하기
+    public Product addProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    // 기존 제품 업데이트하기
+    public Product updateProduct(long id, Product updatedProduct) {
+        Optional<Product> existingProduct = productRepository.findById(id);
+        if (existingProduct.isPresent()) {
+            Product product = existingProduct.get();
+            product.setTitle(updatedProduct.getTitle());
+            product.setPrice(updatedProduct.getPrice());
+            product.setDescription(updatedProduct.getDescription());
+            product.setCategory(updatedProduct.getCategory());
+            product.setImage(updatedProduct.getImage());
+            return productRepository.save(product);
+        }
+        return null; // 제품이 없을 경우 null 반환
+    }
+
+    // 제품 삭제하기
+    public void deleteProduct(long id) {
+        productRepository.deleteById(id);
+    }
+}

@@ -1,0 +1,19 @@
+package com.hbk.restboot.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Product {
+
+    private Long id;               // 상품 ID
+    private String name;           // 상품 이름
+    private String description;    // 상품 설명
+    private Double price;          // 상품 가격
+    private String imageUrl;       // 상품 이미지 URL
+}

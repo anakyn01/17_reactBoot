@@ -1,0 +1,42 @@
+package com.hbk.restboot.controller;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.hbk.restboot.entity.Product;
+import com.hbk.restboot.entity.ProductRepository;
+
+
+@CrossOrigin(origins = "http://localhost:3000") // React 앱이 실행되는 포트
+@RestController
+public class ProductController {
+
+	@Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    private final String externalApiUrl = "https://fakestoreapi.com/products"; // 외부 API URL
+    private final String imageBaseUrl = "https://fakestoreapi.com/products"; // 이미지 URL의 기본 경로
+
+    @GetMapping("/api/products")
+    public List<Product> getProducts() {
+        // 외부 API에서 상품 데이터 가져오기
+        Product[] products = restTemplate.getForObject(externalApiUrl, Product[].class);
+        
+        // 이미지 URL을 절대 경로로 변환
+        return List.of(products).stream()
+                .map(product -> {
+                    product.setImageUrl(imageBaseUrl + product.getImageUrl());
+                    return product;
+                })
+                .collect(Collectors.toList()); // 외부 데이터를 List로 변환하여 반환
+    }
+}

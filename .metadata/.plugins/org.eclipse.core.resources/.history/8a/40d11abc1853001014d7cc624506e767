@@ -1,0 +1,24 @@
+package com.hbk.restboot.entity;
+
+import java.math.BigDecimal;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor  // 기본 생성자 추가
+@AllArgsConstructor // 모든 필드를 받는 생성자 추가
+public class Product {
+	
+	@Id
+    private long id;
+    private String title;
+    private BigDecimal price;  // 숫자 관련 필드는 BigDecimal로 변경하는 것이 좋습니다.
+    private String description;
+    private String category;
+    private String image;
+}

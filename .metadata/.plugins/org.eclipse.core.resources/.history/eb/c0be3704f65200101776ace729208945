@@ -1,0 +1,6 @@
+package com.hbk.restboot.controller;
+
+@RestController
+public class HelloController {
+
+}

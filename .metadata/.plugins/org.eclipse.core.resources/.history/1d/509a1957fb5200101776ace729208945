@@ -1,0 +1,5 @@
+package com.hbk.restboot.config;
+
+public class WebConfig {
+
+}

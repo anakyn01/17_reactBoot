@@ -1,0 +1,5 @@
+package com.hbk.restboot.bean;
+
+public class AppConfig {
+
+}

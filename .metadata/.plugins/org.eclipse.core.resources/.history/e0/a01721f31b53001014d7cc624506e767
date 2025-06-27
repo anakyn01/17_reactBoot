@@ -1,0 +1,5 @@
+spring.application.name=restboot
+server.port=9700
+
+server.servlet.encoding.enabled=true  
+server.servlet.encoding.force=true
